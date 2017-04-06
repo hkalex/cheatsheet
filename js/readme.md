@@ -2,7 +2,7 @@
 
 
 ## Fastest for loop
-```
+```Javascript
 /**
  * Don't use "let i=0". It has scope check so slower.
  * Don't use forEach function. Function call is much much slower.
@@ -81,3 +81,44 @@ function binarySearch(ar, el, compare_fn) {
     return -m - 1;
 }
 ```
+
+
+## Group-by function template
+```
+function group(arr, groupFun) {
+  var result = [];
+  var processed =[];
+
+  for(var i=arr.length-1; i>=0; i--) {
+    if (processed[i]) continue;
+
+    var grouped = [];
+    var cur = arr[i];
+    processed[i] = 1;
+
+    grouped.push(cur);
+
+    for(var j=i-1; j>=0; j--) {
+      if (processed[j]) continue;
+      var cmp = arr[j];
+      var groupFunResult = groupFun(cur, cmp);
+      if (groupFunResult) {
+        grouped.push(cmp);
+        processed[j] = 1;
+      }
+    }
+    result.push(grouped);
+  }
+  return result;
+}
+```
+
+Here is an example
+```Javascript
+var a = [1,2,3,4,5];
+var b = group(a, (a,b) => {
+  return (a%2 === 0 && b%2 === 0) ||
+        (a%2 === 1 && b%2 ===1)
+});
+```
+The result of `b` is `[[1,3,5],[2,4]]`. They will be grouped by even and odd.
