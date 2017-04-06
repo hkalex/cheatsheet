@@ -145,3 +145,60 @@ var b = group(a, (a,b) => {
 });
 ```
 The result of `b` is `[[1,3,5],[2,4]]`. They will be grouped by even and odd.
+
+## Quick Sort
+Quicksort is generally considered to be efficient and fast and so is used by V8 as the implementation for Array.prototype.sort() on arrays with more than 23 items. For less than 23 items, V8 uses insertion sort[2]. Merge sort is a competitor of quicksort as it is also efficient and fast but has the added benefit of being stable. This is why Mozilla and Safari use it for their implementation of Array.prototype.sort().
+```Javascript
+function quicksort(array) {
+  if (array.length <= 1) {
+    return array;
+  }
+
+  var pivot = array[0];
+  
+  var left = []; 
+  var right = [];
+
+  for (var i = 1; i < array.length; i++) {
+    array[i] < pivot ? left.push(array[i]) : right.push(array[i]);
+  }
+
+  return quicksort(left).concat(pivot, quicksort(right));
+};
+```
+
+## Ranged Quick Sort
+
+```Javascript
+function  quickSort(arr, left, right)
+{
+	var i = left;
+	var j = right;
+	var tmp;
+	pivotidx = (left + right) / 2; 
+	var pivot = parseInt(arr[pivotidx.toFixed()]);  
+	/* partition */
+	while (i <= j)
+	{
+		while (parseInt(arr[i]) < pivot)
+		i++;
+		while (parseInt(arr[j]) > pivot)
+			j--;
+		if (i <= j)
+		{
+			tmp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = tmp;
+			i++;
+			j--;
+		}
+	}
+
+	/* recursion */
+	if (left < j)
+		quickSort(arr, left, j);
+	if (i < right)
+		quickSort(arr, i, right);
+	return arr;
+}
+```
