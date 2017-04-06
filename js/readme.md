@@ -26,6 +26,9 @@ a.sort(); // a = [123,45,678]
 // sort by number
 var a = [123,678,45];
 a.sort(function(a,b) { return a-b; }); // a = [45,123,678]
+
+// or
+a.sort((a,b)=>a-b); // a = [45,123,678]
 ```
 
 ## Insert an element
