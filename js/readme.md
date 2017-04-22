@@ -1,5 +1,13 @@
 # Javascript cheatsheet
 
+## Call vs Apply
+Think of `a`pply with `a`rray, `c`all with `c`olumns.
+```Javascript
+Function.apply(this, [arg1,arg2,arg3]);
+Function.call(this, arg1,arg2,arg3);
+
+```
+
 
 ## Fastest for loop
 ```Javascript
